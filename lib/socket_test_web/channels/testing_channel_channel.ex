@@ -25,6 +25,11 @@ defmodule SocketTestWeb.TestingChannelChannel do
     {:noreply, socket}
   end
 
+  def handle_in("btn_track", payload, socket) do
+    IO.inspect(payload)
+    {:noreply, socket}
+  end
+
   def handle_in(_, payload, socket) do
     #IO.puts("messaggio ricevuto")
     broadcast(socket, "new_msg", payload)

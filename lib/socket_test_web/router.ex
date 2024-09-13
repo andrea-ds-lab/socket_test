@@ -20,6 +20,12 @@ defmodule SocketTestWeb.Router do
     get "/", PageController, :home
   end
 
+  scope "/api", SocketTestWeb do
+    pipe_through :api
+    get "/messages", MessageController, :index
+  end
+
+
   # Other scopes may use custom stacks.
   # scope "/api", SocketTestWeb do
   #   pipe_through :api

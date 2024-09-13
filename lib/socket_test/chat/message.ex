@@ -2,6 +2,7 @@ defmodule SocketTest.Chat.Message do
   use Ecto.Schema
   import Ecto.Changeset
 
+  @derive {Jason.Encoder, only: [:id, :user, :body, :boosted, :channel, :inserted_at, :updated_at]}
   schema "messages" do
     field :user, :string
     field :body, :string
@@ -14,9 +15,7 @@ defmodule SocketTest.Chat.Message do
   @doc false
   def changeset(message, attrs) do
     message
-    # Exclude :inserted_at from cast
     |> cast(attrs, [:body, :user, :boosted, :channel])
-    # Exclude :inserted_at from validation
     |> validate_required([:body, :user, :channel])
   end
 end

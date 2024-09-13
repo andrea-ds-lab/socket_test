@@ -38,6 +38,11 @@ defmodule SocketTestWeb.Endpoint do
     plug Phoenix.Ecto.CheckRepoStatus, otp_app: :socket_test
   end
 
+  plug CORSPlug,
+    origin: ["*"], # Replace with specific origins if needed (e.g., ["http://localhost:3000"])
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    headers: ["Authorization", "Content-Type"]
+
   plug Phoenix.LiveDashboard.RequestLogger,
     param_key: "request_logger",
     cookie_key: "request_logger"

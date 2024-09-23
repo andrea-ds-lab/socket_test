@@ -2,7 +2,8 @@ defmodule SocketTest.Chat.Message do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @derive {Jason.Encoder, only: [:id, :user, :body, :boosted, :channel, :inserted_at, :updated_at]}
+  @derive {Jason.Encoder,
+           only: [:id, :user, :body, :boosted, :channel, :inserted_at, :updated_at]}
   schema "messages" do
     field :user, :string
     field :body, :string

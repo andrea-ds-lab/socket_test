@@ -39,7 +39,8 @@ defmodule SocketTestWeb.Endpoint do
   end
 
   plug CORSPlug,
-    origin: ["*"], # Replace with specific origins if needed (e.g., ["http://localhost:3000"])
+    # Replace with specific origins if needed (e.g., ["http://localhost:3000"])
+    origin: ["*"],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     headers: ["Authorization", "Content-Type"]
 

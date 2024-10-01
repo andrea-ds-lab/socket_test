@@ -51,8 +51,10 @@ defmodule SocketTestWeb.MessageController do
   def index(conn, _params) do
     query =
       from m in Message,
-        order_by: [desc: m.id],   # Order by descending ID to get the latest messages
-        limit: @max_initial_fetched_messages                 # Limit to the last 25 messages
+        # Order by descending ID to get the latest messages
+        order_by: [desc: m.id],
+        # Limit to the last 25 messages
+        limit: @max_initial_fetched_messages
 
     messages = Repo.all(query)
     IO.puts("Length: #{length(messages)}")
@@ -62,5 +64,4 @@ defmodule SocketTestWeb.MessageController do
 
     json(conn, %{messages: messages})
   end
-
 end

@@ -21,6 +21,7 @@ defmodule SocketTest.Chat.Message do
     message
     |> cast(attrs, [:body, :user, :boosted, :channel])
     |> validate_required([:body, :user, :channel])
+    |> validate_length(:body, max: 1024)
   end
 
   def fetch_latest_messages(repo, id \\ nil, amount) do
@@ -46,8 +47,7 @@ defmodule SocketTest.Chat.Message do
           |> repo.all()
       end
 
-      IO.puts("Lunghezza messaggi fetchati: #{length(messages)}" )
+    IO.puts("Lunghezza messaggi fetchati: #{length(messages)}")
     messages
   end
-
 end

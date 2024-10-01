@@ -80,7 +80,7 @@ defmodule SocketTestWeb.TestingChannelChannel do
     Ecto.Changeset.default_error_message(msg, opts)
   end
 
-  def handle_in(_, payload, socket) do
+  def handle_in(_, _payload, socket) do
     # Handle other messages if needed
     {:noreply, socket}
   end
@@ -88,5 +88,11 @@ defmodule SocketTestWeb.TestingChannelChannel do
   # Add authorization logic here as required.
   defp authorized?(_payload) do
     true
+  end
+
+  @impl true
+  def terminate(_reason, _socket) do
+    IO.puts("A client has left the channel")
+    :ok
   end
 end

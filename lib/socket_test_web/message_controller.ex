@@ -5,6 +5,8 @@ defmodule SocketTestWeb.MessageController do
   import Ecto.Query
   import Plug.Conn
 
+  @max_initial_fetched_messages 25
+
   def index(conn, %{"start_from" => start_from}) do
     case DateTime.from_iso8601(start_from) do
       {:ok, start_time, 0} ->
@@ -49,9 +51,16 @@ defmodule SocketTestWeb.MessageController do
   def index(conn, _params) do
     query =
       from m in Message,
-        order_by: [asc: m.inserted_at]
+        order_by: [desc: m.id],   # Order by descending ID to get the latest messages
+        limit: @max_initial_fetched_messages                 # Limit to the last 25 messages
 
     messages = Repo.all(query)
+    IO.puts("Length: #{length(messages)}")
+
+    # Optionally reverse the list to keep the messages in ascending order
+    messages = Enum.reverse(messages)
+
     json(conn, %{messages: messages})
   end
+
 end

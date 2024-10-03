@@ -5,7 +5,7 @@ defmodule SocketTestWeb.OllamaInteraction do
 
   @url "http://127.0.0.1:11111/api/generate"
   # Specify the model if needed
-  @model "moondream"
+  @model "llama3-chatqa"
   # Limit the number of tokens in the response
   @max_tokens 10
 

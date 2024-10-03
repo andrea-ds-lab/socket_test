@@ -3,7 +3,7 @@ defmodule SocketTest.Chat.Message do
   import Ecto.Changeset
   import Ecto.Query
 
-  @max_amount_of_messages_to_fetch 10
+  @max_amount_of_messages_to_fetch 50
 
   @derive {Jason.Encoder,
            only: [:id, :user, :body, :boosted, :channel, :inserted_at, :updated_at]}

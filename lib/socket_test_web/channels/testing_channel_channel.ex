@@ -67,7 +67,7 @@ defmodule SocketTestWeb.TestingChannelChannel do
                 _ =
                   Chat.create_message(%{
                     body: response,
-                    user: "llama3-chatqa",
+                    user: "IA",
                     boosted: true,
                     channel: channel,
                     # Set to current UTC time
@@ -77,7 +77,7 @@ defmodule SocketTestWeb.TestingChannelChannel do
                 # Broadcast the response back to the socket
                 broadcast(socket, "new_msg", %{
                   body: response,
-                  user: "llama3-chatqa",
+                  user: "IA",
                   boosted: true,
                   channel: channel,
                   timestamp: DateTime.utc_now()

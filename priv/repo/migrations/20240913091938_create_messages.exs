@@ -3,7 +3,8 @@ defmodule SocketTest.Repo.Migrations.CreateMessages do
 
   def change do
     create table(:messages) do
-      add :body, :string, size: 1024 # Update this line
+      # Update this line
+      add :body, :string, size: 1024
       add :user, :string
       add :boosted, :boolean, default: false, null: false
       add :channel, :string

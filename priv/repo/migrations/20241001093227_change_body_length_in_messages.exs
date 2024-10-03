@@ -3,8 +3,8 @@ defmodule SocketTest.Repo.Migrations.ChangeBodyLengthInMessages do
 
   def change do
     alter table(:messages) do
-      modify :body, :string, size: 1024 # Update to 1024 characters
+      # Update to 1024 characters
+      modify :body, :string, size: 1024
     end
   end
-
 end

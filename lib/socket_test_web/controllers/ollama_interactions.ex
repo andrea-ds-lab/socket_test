@@ -3,17 +3,14 @@ defmodule SocketTestWeb.OllamaInteraction do
   A module to interact with the Ollama API.
   """
 
-  @url "http://127.0.0.1:11223/api/generate"
+  @url "http://127.0.0.1:11111/api/generate"
   # Specify the model if needed
-  @model "llama3-chatqa"
+  @model "moondream"
   # Limit the number of tokens in the response
   @max_tokens 10
 
   @doc """
   Interacts with the Ollama API using the given prompt.
-
-  ## Parameters
-  - prompt: A string representing the prompt for the API.
 
   ## Returns
   - A tuple with the status and response (either success or error).
@@ -35,12 +32,18 @@ defmodule SocketTestWeb.OllamaInteraction do
 
     case HTTPoison.post(@url, Jason.encode!(payload), headers, options) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+        IO.inspect(body)
+
         handle_response(body)
 
       {:ok, %HTTPoison.Response{status_code: status_code, body: body}} ->
+        IO.inspect(body)
+
         {:error, "Error: Received status #{status_code} with body #{body}"}
 
       {:error, %HTTPoison.Error{reason: reason}} ->
+        IO.inspect(reason)
+
         {:error, "Error: #{inspect(reason)}"}
     end
   end
@@ -60,13 +63,15 @@ defmodule SocketTestWeb.OllamaInteraction do
   end
 
   defp combine_responses(data) do
+    IO.inspect(data)
+
     data
     |> String.trim()
     |> String.split("\n")
     |> Enum.reduce(%{response: "", done: false}, fn line, acc ->
       case Jason.decode(line) do
         {:ok, %{"response" => response, "done" => done}} ->
-          updated_response = acc.response <> " " <> response
+          updated_response = acc.response <> response
           %{response: String.trim(updated_response), done: done}
 
         _ ->

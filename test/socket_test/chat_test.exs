@@ -78,3 +78,20 @@ defmodule SocketTest.ChatTest do
     end
   end
 end
+
+
+
+
+defmodule MyStream do
+  def large_lines!(path) do
+    File.stream!(path)
+    |> Stream.map(&String.trim_trailing/1)
+    |> Enum.filter(&(String.length(&1) > 80))
+  end
+
+  def small_lines!(path) do
+    File.stream!(path)
+    |> Stream.map(&String.trim_trailing/1)
+    |> Enum.filter(&(String.length(&1) < 80))
+  end
+end

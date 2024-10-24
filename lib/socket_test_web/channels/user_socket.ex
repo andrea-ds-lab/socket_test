@@ -10,6 +10,10 @@ defmodule SocketTestWeb.UserSocket do
 
   channel "testing_channel:*", SocketTestWeb.TestingChannelChannel
 
+  channel "voice_room:*", SocketTestWeb.VoiceRoomChannel
+
+  channel "call:*", SocketTestWeb.CallChannel
+
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
   # verification, you can put default assigns into
